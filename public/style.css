@@ -1,0 +1,119 @@
+
+#video-grid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video {
+    height: 250px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.main{
+    height: 100vh;
+    display: flex;
+}
+
+.main__right{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0.2;
+    background-color: #242324;
+    border: 1px solid #3D3D42;
+}
+
+.main__left{
+    display: flex;
+    flex-grow: 0.8;
+    flex-direction: column;
+}
+
+.main__videos{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.main__controls{
+    display: flex;
+    background-color: #1C1E20;
+    color:#D2D2D2;
+    padding: 5px;
+    justify-content: space-between;
+}
+
+.main_control_block{
+    display: flex;
+}
+
+.main_control_button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+.main_control_button i {
+    font-size: 24px;
+}
+
+.main_control_button:hover{
+    background-color: #343434;
+    border-radius: 5px;
+}
+
+.leave-meeting{
+    color: #EB534B;
+}
+
+.main_header{
+    color: #F5F5F5;
+    text-align: center;
+}
+
+.main_chat_window{
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.main_message_window{
+    padding: 22px 12px;
+    display: flex;
+}
+
+.main_message_window input {
+    flex-grow: 1;
+    color: #F5F5F5;
+    border: none;
+    background-color: transparent;
+}
+
+.main_message_window i{
+    display: flex;
+    color: #F5F5F5;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.main_chat_button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+ul{
+    color:#F5F5F5;
+}
+
+.fa-microphone-slash,.fa-video-slash{
+    color: red;
+}

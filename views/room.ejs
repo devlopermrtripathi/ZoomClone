@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href='style.css'>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        const ROOM_ID = '<%= roomId %>'
+    </script>
+</head>
+<body>
+    <div class='main'>
+        <div class='main__left'>
+            <div class="main__videos">
+                <div id = 'video-grid'>
+                </div>
+            </div>
+            <div class="main__controls">
+                <div class="main_control_block">
+                    <div class="main_control_button"  id='main_mute_button' onclick="muteUnmute()">
+                        <i class="fas fa-microphone"></i>
+                        <span>Mute</span>
+                    </div>
+                    <div class="main_control_button" id='main_video_button' onclick="disableVideo()">
+                        <i class="fas fa-video"></i>
+                        <span>Stop Video</span>
+                    </div>
+                </div>
+
+                <div class="main_control_block">
+                    <div class="main_control_button">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Security</span>
+                    </div>
+                    <div class="main_control_button">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Participants</span>
+                    </div>
+                    <div class="main_control_button">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Chat</span>
+                    </div>
+                </div>
+                <div class="main_control_block">
+                    <div class="main_control_button">
+                        <span class="leave-meeting">Leave Meeting</span>
+                    </div>
+                </div>
+            </div>
+      
+        </div>
+        <div class= 'main__right'>
+            <div class="main_header">
+                <h6>Chat</h6>
+            </div>
+            <div class="main_chat_window">
+                <ul class="message">
+
+                </ul>
+            </div>
+            <div class="main_message_window">
+                <input type="text" placeholder="Enter your message here" id='chat_message'>
+                <div id="main_chat_button">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
