@@ -34,7 +34,7 @@ io.on('connection',socket=>{ // This is responsible for listening the message
     })
 })
 
-server.listen('3000',()=>{
+server.listen(process.env.PORT||'3000',()=>{
     console.log('Connected to port 3000...');
 })
 
