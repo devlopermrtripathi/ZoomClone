@@ -1,20 +1,28 @@
-//Client Side 
-
 const socket = io('/');
-const myVideo = document.createElement('video'); // created an HTML video tag
-const videoGrid = document.getElementById('video-grid'); // just a normal div to put the video
-myVideo.muted = true ; //sound in the video is turned off 
+const videoGrid = document.getElementById('video-grid');
+
+var peer = new Peer(undefined,{
+    path : '/peerjs',
+    host : '/',
+    port : 3000
+});
+
+let myVideoStream;
+const myVideo = document.createElement('video');
+myVideo.muted = true ;
 
 navigator.mediaDevices.getUserMedia({
     audio : true, // here we can identify whether the audio property should be available or not
     video : true  // here we can identify whether the video property should be available or not  
 }).then(stream => {
     //It returns a stream object if there is no error 
-    addVideoStream(myVideo,stream);
     myVideoStream = stream;
+    addVideoStream(myVideo,stream);
+
     peer.on('call', call=>{
         call.answer(stream);
         const video = document.createElement('video');
+        video.className = 'Client-1' ;
         call.on('stream',userVideoStream=>{
             addVideoStream(video,stream);
         })
@@ -22,36 +30,33 @@ navigator.mediaDevices.getUserMedia({
     socket.on('user-connected',userId=>{
         connectNewUser(userId,stream);
     })
-
-    const connectNewUser = (userId,stream) =>{
-        const call  = peer.call(userId,stream);
-        const video = document.createElement('video');
-        call.on('stream',userVideoStream =>{
-            addVideoStream(video,stream)
-        })
-    }
-    
-    const addVideoStream = (myVideo,stream) => {
-        myVideo.srcObject = stream; // source for the video tag it can be anything like a video file or anything
-        myVideo.addEventListener('loadedmetadata',()=>{ // when the video is loaded successfully this will be passed 
-            myVideo.play() 
-        })
-        videoGrid.append(myVideo); // appended the video object
-    }
 }).catch(err => {
     console.log(err);
     alert('Error while fetching the video information')
 })
 
-var peer = new Peer(undefined,{
-    path : '/peerjs',
-    host : '/',
-    port : 443
-});
-
 peer.on('open', (id)=>{
     socket.emit('join-room',ROOM_ID,id); // This is responsible for sending a message 
 })
+
+
+const connectNewUser = (userId,stream) =>{
+    alert('hi..')
+    const call  = peer.call(userId,stream);
+    const video = document.createElement('video');
+    video.className = 'Client-2' ;
+    call.on('stream',userVideoStream =>{
+        addVideoStream(video,userVideoStream)
+    })
+}
+
+const addVideoStream = (myVideo,stream) => {
+    myVideo.srcObject = stream; // source for the video tag it can be anything like a video file or anything
+    myVideo.addEventListener('loadedmetadata',()=>{ // when the video is loaded successfully this will be passed 
+        myVideo.play() 
+    })
+    videoGrid.append(myVideo); // appended the video object
+}
 
 let text = $('input');
 
