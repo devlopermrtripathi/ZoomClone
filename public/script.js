@@ -24,7 +24,7 @@ navigator.mediaDevices.getUserMedia({
         const video = document.createElement('video');
         video.className = 'Client-1' ;
         call.on('stream',userVideoStream=>{
-            addVideoStream(video,stream);
+            addVideoStream(video,userVideoStream);
         })
     })
     socket.on('user-connected',userId=>{
@@ -41,7 +41,6 @@ peer.on('open', (id)=>{
 
 
 const connectNewUser = (userId,stream) =>{
-    alert('hi..')
     const call  = peer.call(userId,stream);
     const video = document.createElement('video');
     video.className = 'Client-2' ;
