@@ -22,6 +22,22 @@ navigator.mediaDevices.getUserMedia({
     socket.on('user-connected',userId=>{
         connectNewUser(userId,stream);
     })
+
+    const connectNewUser = (userId,stream) =>{
+        const call  = peer.call(userId,stream);
+        const video = document.createElement('video');
+        call.on('stream',userVideoStream =>{
+            addVideoStream(video,stream)
+        })
+    }
+    
+    const addVideoStream = (myVideo,stream) => {
+        myVideo.srcObject = stream; // source for the video tag it can be anything like a video file or anything
+        myVideo.addEventListener('loadedmetadata',()=>{ // when the video is loaded successfully this will be passed 
+            myVideo.play() 
+        })
+        videoGrid.append(myVideo); // appended the video object
+    }
 }).catch(err => {
     console.log(err);
     alert('Error while fetching the video information')
@@ -36,22 +52,6 @@ var peer = new Peer(undefined,{
 peer.on('open', (id)=>{
     socket.emit('join-room',ROOM_ID,id); // This is responsible for sending a message 
 })
-
-const connectNewUser = (userId,stream) =>{
-    const call  = peer.call(userId,stream);
-    const video = document.createElement('video');
-    call.on('stream',userVideoStream =>{
-        addVideoStream(video,stream)
-    })
-}
-
-const addVideoStream = (myVideo,stream) => {
-    myVideo.srcObject = stream; // source for the video tag it can be anything like a video file or anything
-    myVideo.addEventListener('loadedmetadata',()=>{ // when the video is loaded successfully this will be passed 
-        myVideo.play() 
-    })
-    videoGrid.append(myVideo); // appended the video object
-}
 
 let text = $('input');
 
